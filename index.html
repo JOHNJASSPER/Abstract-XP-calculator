@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstract XP Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <main class="container">
+        <header>
+            <h1>Abstract <span class="highlight">XP</span> Calculator</h1>
+            <p>Plan your journey to the next tier.</p>
+        </header>
+
+        <div class="calculator-card">
+            <div class="input-group">
+                <label for="current-tier">Current Tier</label>
+                <select id="current-tier" name="current-tier">
+                    <option value="0">Bronze</option>
+                    <option value="1">Silver</option>
+                    <option value="2">Gold</option>
+                    <option value="3">Platinum</option>
+                    <option value="4">Obsidian</option>
+                    <option value="5">Ethereal</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="current-xp">Current XP in Tier</label>
+                <input type="number" id="current-xp" placeholder="XP earned since level up" min="0">
+            </div>
+
+            <div class="input-group">
+                <label for="target-tier">Target Tier</label>
+                <select id="target-tier" name="target-tier">
+                    <option value="1">Silver (1,000XP)</option>
+                    <option value="2">Gold (100,000XP)</option>
+                    <option value="3">Platinum (1,000,000XP)</option>
+                    <option value="4">Obsidian (5,000,000XP)</option>
+                    <option value="5">Ethereal (8,000,000XP)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="weekly-xp">Weekly Average XP</label>
+                <input type="number" id="weekly-xp" placeholder="e.g. 250" min="1">
+            </div>
+
+            <button id="calculate-btn">Calculate Journey</button>
+        </div>
+
+        <div id="results" class="results-card hidden">
+            <div class="result-header">
+                <h2>Your Projection</h2>
+            </div>
+
+            <div class="result-grid">
+                <div class="result-item">
+                    <span class="label">Total XP Needed</span>
+                    <span class="value" id="xp-needed">0</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Time Remaining</span>
+                    <span class="value highlight-text" id="time-remaining">0 Weeks</span>
+                </div>
+                <div class="result-item">
+                    <span class="label">Estimated Arrival</span>
+                    <span class="value" id="estimated-date">--</span>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="progress-text" id="progress-percentage">0% Complete</span>
+            </div>
+
+            <button id="download-btn" class="download-btn">Download Journey Card</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
