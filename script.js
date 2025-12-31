@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tierIndex = parseInt(currentTierSelect.value);
         const tier = TIER_DATA[tierIndex];
         if (tier && tier.size > 0) {
-            currentXpInput.placeholder = `Max ${tier.size.toLocaleString()}`;
+            currentXpInput.placeholder = `Max ${(tier.size - 1).toLocaleString()}`;
         } else {
             currentXpInput.placeholder = "Max Level Reached";
         }
@@ -105,10 +105,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const daysNeeded = Math.ceil(weeksNeeded * 7);
         const monthsNeeded = (weeksNeeded / 4.345).toFixed(1);
 
-        // 4. Date Projection
+        // 4. Date Projection (Aligned to Tuesday)
         const today = new Date();
         const futureDate = new Date(today);
         futureDate.setDate(today.getDate() + daysNeeded);
+
+        // Adjust to next Tuesday
+        // Day 2 is Tuesday (Sunday=0, Monday=1, Tuesday=2...)
+        const dayOfWeek = futureDate.getDay();
+        if (dayOfWeek !== 2) {
+            // Calculate days to add to get to next Tuesday
+            // if day is 3 (Wed), need 6 days ((2 + 7 - 3) % 7) = 6? 
+            // Formula: (targetDay + 7 - currentDay) % 7. If 0, it is today, but we might want *next* week if it passed? 
+            // Assuming if it lands exactly on Tuesday we are good.
+
+            let daysUntilTuesday = (2 + 7 - dayOfWeek) % 7;
+            if (daysUntilTuesday === 0) daysUntilTuesday = 7; // Optional: if we want strictly *next* Tuesday if today is Tuesday? 
+            // Actually, if the raw math lands on Tuesday, accept it. 
+            // If it lands on Wed, we have to wait for next Tuesday.
+
+            // Correction: If dayOfWeek != 2, we just add the diff.
+            if (daysUntilTuesday === 0 && dayOfWeek !== 2) {
+                // Should not happen with % 7 logic if dayOfWeek != 2
+            }
+
+            futureDate.setDate(futureDate.getDate() + daysUntilTuesday);
+        }
 
         // 5. Update UI
         resultsContainer.classList.remove('hidden');

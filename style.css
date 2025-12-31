@@ -248,21 +248,69 @@ button#calculate-btn:active {
     float: right;
 }
 
-.download-btn {
+.action-buttons {
+    display: flex;
+    gap: 1rem;
     margin-top: 1.5rem;
-    width: 100%;
+}
+
+.action-btn {
+    flex: 1;
     padding: 12px;
-    background: transparent;
-    border: 1px solid var(--accent-primary);
-    color: var(--accent-primary);
     border-radius: 12px;
     font-family: var(--font-main);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
-.download-btn:hover {
-    background: rgba(0, 255, 148, 0.1);
+.action-btn.primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    color: black;
+}
+
+.action-btn.secondary {
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
     box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Premium Card Details */
+.results-card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(0, 255, 148, 0.2);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 255, 148, 0.05);
+    overflow: hidden;
+}
+
+/* Decorative corner accents */
+.results-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(0, 255, 148, 0.4), transparent 60%);
+    z-index: 0;
+}
+
+.results-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(-45deg, rgba(0, 229, 255, 0.4), transparent 60%);
+    z-index: 0;
 }
