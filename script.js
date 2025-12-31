@@ -187,33 +187,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
         progressPercentage.textContent = `${percentage.toFixed(1)}% of Journey`;
 
-        resultsContainer.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Download Card Logic
-    const downloadBtn = document.getElementById('download-btn');
-    downloadBtn.addEventListener('click', () => {
-        // Hide button for screenshot
-        downloadBtn.style.display = 'none';
-
-        // Ensure html2canvas is loaded
-        if (typeof html2canvas === 'undefined') {
-            alert('Error: html2canvas library not loaded.');
-            downloadBtn.style.display = 'block';
-            return;
-        }
-
-        html2canvas(resultsContainer, {
-            backgroundColor: '#0a0a0a', // specific background color
-            scale: 2 // high res
-        }).then(canvas => {
-            // Restore button
-            downloadBtn.style.display = 'block';
-
-            const link = document.createElement('a');
-            link.download = 'abstract-xp-journey.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        });
     });
 });
